@@ -1,9 +1,6 @@
 package com.codekion.vecino_seguro.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -20,6 +17,7 @@ public class ContactosEmergencia {
     @Id
     @ColumnDefault("nextval('contactos_emergencia_contacto_id_seq'::regclass)")
     @Column(name = "contacto_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 50)

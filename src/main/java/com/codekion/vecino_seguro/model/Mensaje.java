@@ -18,6 +18,7 @@ public class Mensaje {
     @Id
     @ColumnDefault("nextval('mensajes_mensaje_id_seq'::regclass)")
     @Column(name = "mensaje_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

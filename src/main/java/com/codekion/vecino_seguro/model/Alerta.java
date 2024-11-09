@@ -17,6 +17,7 @@ public class Alerta {
     @Id
     @ColumnDefault("nextval('alertas_alerta_id_seq'::regclass)")
     @Column(name = "alerta_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

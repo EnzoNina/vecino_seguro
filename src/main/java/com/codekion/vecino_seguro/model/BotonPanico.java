@@ -19,6 +19,7 @@ public class BotonPanico {
     @Id
     @ColumnDefault("nextval('boton_panico_panico_id_seq'::regclass)")
     @Column(name = "panico_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
