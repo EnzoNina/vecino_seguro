@@ -1,13 +1,14 @@
 package com.codekion.vecino_seguro.service.Iservice;
 
 import com.codekion.vecino_seguro.model.PerfilesFamiliare;
+import com.codekion.vecino_seguro.model.dto.RequestPerfilFamiliarDto;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface IPerfilFamiliarservice {
 
-    PerfilesFamiliare agregarPerfilFamiliar(PerfilesFamiliare perfilFamiliar);
+    PerfilesFamiliare agregarPerfilFamiliar(Integer id_usuario, RequestPerfilFamiliarDto perfilFamiliar);
 
     List<PerfilesFamiliare> listarPerfilesFamiliares(Integer id_usuario);
 

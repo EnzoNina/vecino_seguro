@@ -1,8 +1,7 @@
 package com.codekion.vecino_seguro.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,9 +9,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+@Builder
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "perfiles_familiares")
 public class PerfilesFamiliare {
     @Id
@@ -23,12 +25,12 @@ public class PerfilesFamiliare {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "usuario_jefe_id")
-    private Usuario usuarioJefe;
+    @JoinColumn(name = "id_usuario")
+    private Usuario id_usuario;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_familia_id")
-    private Usuario usuarioFamilia;
+    @JoinColumn(name = "familiar_id")
+    private Usuario familiar_id;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.SET_NULL)
