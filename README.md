@@ -28,10 +28,8 @@ Este proyecto forma parte de la aplicación Vecino Seguro, una herramienta que p
 
 ```json
 {
-  "familiar_id": 3,
-  "relacion_id": 1,
-  "latitud": 45.12345678,
-  "longitud": -93.12345678
+  "familiar_id": 3,   // ID del familiar a agregar
+  "relacion_id": 1    // ID de la relación familiar
 }
 ```
 
