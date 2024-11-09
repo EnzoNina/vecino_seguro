@@ -315,11 +315,11 @@ una estructura familiar.
 
 ```json
 {
-  "id_usuario": "",
-  "id_tipo_incidente": "",
-  "descripcion": "",
-  "latitud": "",
-  "longitud": ""
+  "id_usuario": "1",
+  "id_tipo_incidente": "1",
+  "descripcion": "Robo de billetera con pistola",
+  "latitud": "-10.31539313578945",
+  "longitud": "-11.55126066248143"
 }
 ```
 
@@ -327,7 +327,15 @@ una estructura familiar.
 
 ```json
 {
-  "mensaje": "Incidente reportado exitosamente"
+  "mensaje": "Incidente reportado exitosamente",
+  "incidente": {
+    "id": 2,
+    "tipo_incidente": "Robo",
+    "descripcion": "Robo de billetera con pistola",
+    "latitud": "-16.31539314",
+    "longitud": "-71.55126066",
+    "fecha_reporte": "2024-11-09T16:49:02.864564Z"
+  }
 }
 ```
 
@@ -340,25 +348,18 @@ una estructura familiar.
 #### Cuerpo de respuesta
 
 ```json
-    {
+{
   "incidentes": [
     {
-      "id": 1,
+      "id": "2",
       "tipo_incidente": "Robo",
-      "descripcion": "Robo en la calle 1",
-      "latitud": "123456",
-      "longitud": "654321",
-      "fecha_reporte": "2021-10-10"
-    },
-    {
-      "id": 2,
-      "tipo_incidente": "Acoso",
-      "descripcion": "Acoso en la calle 2",
-      "latitud": "123456",
-      "longitud": "654321"
+      "descripcion": "Robo de billetera con pistola",
+      "latitud": "-16.31539314",
+      "longitud": "-71.55126066",
+      "fecha_reporte": "2024-11-09T16:49:02.864564Z"
     }
   ],
-  "mensaje": "Incidentes listados exitosamente"
+  "mensaje": "Incidentes del usuario"
 }
 ```
 
@@ -374,33 +375,33 @@ una estructura familiar.
 {
   "incidentes": [
     {
-      "id": 1,
+      "id": "1",
       "tipo_incidente": "Robo",
-      "descripcion": "Robo en la calle 1",
-      "latitud": "123456",
-      "longitud": "654321",
-      "fecha_reporte": "2021-10-10"
+      "descripcion": "Robo de billetera con pistola",
+      "latitud": "-16.31539314",
+      "longitud": "-71.55126066",
+      "fecha_reporte": "2024-11-09T16:49:02.864564Z"
     },
     {
-      "id": 2,
-      "tipo_incidente": "Acoso",
-      "descripcion": "Acoso en la calle 2",
-      "latitud": "123456",
-      "longitud": "654321"
+      "id": "2",
+      "tipo_incidente": "Robo",
+      "descripcion": "Robo de billetera con pistola",
+      "latitud": "-16.31539314",
+      "longitud": "-71.55126066",
+      "fecha_reporte": "2024-11-09T16:49:02.864564Z"
     }
   ],
   "mensaje": "Todos los incidentes"
 }
 ```
 
-### Contactos de Emergencia
+## Contactos de Emergencia
 
 #### Listar Todos los Contactos de Emergencia
 
 ```http
     GET /servicios-emergencia/listar
 ```
-
 #### Cuerpo de respuesta
 
 ```json
@@ -409,21 +410,85 @@ una estructura familiar.
     {
       "id": 1,
       "tipoServicio": "Policía",
-      "nombreServicio": "Policía",
-      "telefonoContacto": "123456",
-      "ubicacionLat": "123456",
-      "ubicacionLong": "123456"
+      "nombreServicio": "Central de Emergencias (PNP)",
+      "telefonoContacto": "105",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
     },
     {
       "id": 2,
-      "tipoServicio": "Policía",
-      "nombreServicio": "Policía",
-      "telefonoContacto": "123456",
-      "ubicacionLat": "123456",
-      "ubicacionLong": "123456"
+      "tipoServicio": "Bomberos",
+      "nombreServicio": "Cuerpo General de Bomberos",
+      "telefonoContacto": "116",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 3,
+      "tipoServicio": "Ambulancia",
+      "nombreServicio": "Samu (Sistema de Atención Móvil de Urgencia)",
+      "telefonoContacto": "106",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 4,
+      "tipoServicio": "Defensa Civil",
+      "nombreServicio": "Indeci - Defensa Civil",
+      "telefonoContacto": "+511 914782465",
+      "ubicacionLat": -12.04318000,
+      "ubicacionLong": -77.02824000
+    },
+    {
+      "id": 5,
+      "tipoServicio": "Emergencia Médica",
+      "nombreServicio": "Cruz Roja Peruana",
+      "telefonoContacto": "+511 2660481",
+      "ubicacionLat": -12.09580000,
+      "ubicacionLong": -77.04850000
+    },
+    {
+      "id": 6,
+      "tipoServicio": "Tránsito",
+      "nombreServicio": "Policía de Tránsito",
+      "telefonoContacto": "217",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 7,
+      "tipoServicio": "Atención a la Mujer",
+      "nombreServicio": "Línea 100 (Violencia Familiar y Sexual)",
+      "telefonoContacto": "100",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 8,
+      "tipoServicio": "Emergencias Sanitarias",
+      "nombreServicio": "Ministerio de Salud (MINSA)",
+      "telefonoContacto": "+511 3156600",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 9,
+      "tipoServicio": "Asistencia Social",
+      "nombreServicio": "Línea de Ayuda al Niño y Adolescente",
+      "telefonoContacto": "1810",
+      "ubicacionLat": -12.04640000,
+      "ubicacionLong": -77.04280000
+    },
+    {
+      "id": 10,
+      "tipoServicio": "Protección Ciudadana",
+      "nombreServicio": "Serenazgo Lima",
+      "telefonoContacto": "313-4000",
+      "ubicacionLat": -12.05800000,
+      "ubicacionLong": -77.03790000
     }
   ],
-  "mensaje": "Todos los contactos de emergencia"
+  "mensaje": "Contactos de emergencia"
 }
 ```
 

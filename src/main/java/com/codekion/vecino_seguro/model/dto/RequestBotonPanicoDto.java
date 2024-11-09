@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RequestBotonPanicoDto {
 
-    private String usuarioId;
+    private String id_usuario;
     private String latitud;
     private String longitud;
 

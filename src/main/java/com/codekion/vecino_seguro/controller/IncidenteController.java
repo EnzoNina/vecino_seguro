@@ -28,7 +28,7 @@ public class IncidenteController {
         IncidenteResponseDto incidenteResponseDto = new IncidenteResponseDto();
         setIncidenteResponseDto(reporte, incidenteResponseDto);
         response.put("mensaje", "Incidente reportado exitosamente");
-        response.put("incidente", reporte);
+        response.put("incidente", incidenteResponseDto);
         return ResponseEntity.ok(response);
     }
 
@@ -66,7 +66,7 @@ public class IncidenteController {
             setIncidenteResponseDto(incidente, incidenteResponseDto);
             incidentesResponse.add(incidenteResponseDto);
         }
-        response.put("incidentes", incidentes);
+        response.put("incidentes", incidentesResponse);
         response.put("mensaje", "Todos los incidentes");
         return ResponseEntity.ok(response);
     }
