@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar out/artifacts/vecino_seguro_jar/vecino_seguro.jar
+web: java -Dserver.port=$PORT -jar target/vecino_seguro-1.jar
