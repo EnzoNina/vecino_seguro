@@ -29,6 +29,7 @@ public class UsuarioController {
         try {
             for (Usuario usuario : usuarios) {
                 ResponseUsuarioBuscarDto responseUsuarioBuscarDto = new ResponseUsuarioBuscarDto();
+                responseUsuarioBuscarDto.setId_usuario(usuario.getId().toString());
                 responseUsuarioBuscarDto.setNombres_completos(usuario.getNombre() + " " + usuario.getApellidop() + " " + usuario.getApellidom());
                 responseDto.add(responseUsuarioBuscarDto);
             }

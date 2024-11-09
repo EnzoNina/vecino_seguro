@@ -21,7 +21,7 @@ public class BotonPanico {
     @Column(name = "panico_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -37,5 +37,10 @@ public class BotonPanico {
     @NotNull
     @Column(name = "longitud", nullable = false, precision = 11, scale = 8)
     private BigDecimal longitud;
+
+    @PrePersist
+    public void prePersist() {
+        fechaActivacion = Instant.now();
+    }
 
 }
