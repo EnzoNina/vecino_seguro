@@ -30,25 +30,16 @@ una estructura familiar.
   "mensaje": "Usuarios listados exitosamente",
   "usuarios": [
     {
-      "nombres_completos": "Enzo Nina Aragon"
+      "id_usuario": "1",
+      "nombres_completos": "Enzo nina aragon"
     },
     {
-      "nombres_completos": "Juan Perez Nina Aragon"
+      "id_usuario": "2",
+      "nombres_completos": "Clever Machaca Asto"
     },
     {
-      "nombres_completos": "Maria Lopez Nina Aragon"
-    },
-    {
-      "nombres_completos": "Carlos Garcia Nina Aragon"
-    },
-    {
-      "nombres_completos": "Ana Torres Nina Aragon"
-    },
-    {
-      "nombres_completos": "Pedro Sanchez Nina Pareja"
-    },
-    {
-      "nombres_completos": "Carmen Ramirez Aragon Pizarro"
+      "id_usuario": "3",
+      "nombres_completos": "Enzo Josue Nina Aragon"
     }
   ]
 }
