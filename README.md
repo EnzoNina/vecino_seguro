@@ -37,13 +37,15 @@ Este proyecto forma parte de la aplicación Vecino Seguro, una herramienta que p
 
 ```json
 {
-  "perfil_id": 7,
-  "id_usuario": 1,
-  "familiar_id": 3,
-  "relacion_id": 1,
-  "latitud": 45.12345678,
-  "longitud": -93.12345678,
-  "fecha_ultima_ubicacion": "2024-11-09T12:34:56.789Z"
+  "mensaje": "Perfil familiar agregado exitosamente",
+  "perfil": {
+    "id": 32,
+    "nombre_usuario": "Pedro Sanchez",
+    "apellido_usuario": "Nina",
+    "nombre_familiar": "Carmen Ramirez",
+    "apellido_familiar": "Aragon",
+    "relacion": "Pareja"
+  }
 }
 ```
 
