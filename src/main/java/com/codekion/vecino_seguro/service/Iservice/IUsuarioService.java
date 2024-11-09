@@ -2,6 +2,7 @@ package com.codekion.vecino_seguro.service.Iservice;
 
 import com.codekion.vecino_seguro.model.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IUsuarioService {
@@ -13,5 +14,7 @@ public interface IUsuarioService {
     Optional<Usuario> findById(Integer id);
 
     Usuario save(Usuario usuario);
+
+    List<Usuario> findAll();
 
 }

@@ -2,6 +2,7 @@ package com.codekion.vecino_seguro.controller;
 
 import com.codekion.vecino_seguro.model.PerfilesFamiliare;
 import com.codekion.vecino_seguro.model.dto.RequestPerfilFamiliarDto;
+import com.codekion.vecino_seguro.model.dto.RequestUpdatePerfilFamiliarDto;
 import com.codekion.vecino_seguro.model.dto.ResponsePerfiFamiliarDto;
 import com.codekion.vecino_seguro.service.Iservice.IPerfilFamiliarservice;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ import java.util.Map;
 @RequestMapping("/perfiles-familiares")
 @RequiredArgsConstructor
 public class PerfilFamiliarController {
-
 
     private final IPerfilFamiliarservice perfilFamiliarservice;
 
@@ -48,7 +48,9 @@ public class PerfilFamiliarController {
             response.put("mensaje", "Perfiles familiares listados exitosamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            response.put("mensaje", "Error al listar los perfiles familiares");
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
@@ -64,7 +66,7 @@ public class PerfilFamiliarController {
     }
 
     // Endpoint para eliminar un perfil familiar
-    @DeleteMapping("/{id_perfil}/{usuarioId}")
+    @DeleteMapping("/eliminar/{id_perfil}/{usuarioId}")
     public ResponseEntity<?> eliminarPerfilFamiliar(@PathVariable Integer id_perfil, @PathVariable Integer usuarioId) {
         Map<String, Object> response = new HashMap<>();
         try {
@@ -72,32 +74,43 @@ public class PerfilFamiliarController {
             response.put("mensaje", "Perfil familiar eliminado exitosamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al eliminar el perfil familiar: " + e.getMessage());
+            response.put("mensaje", "Error al eliminar el perfil familiar");
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
     // Endpoint para actualizar un perfil familiar
     @PutMapping("/{id_perfil}/{id_usuario}")
-    public ResponseEntity<?> actualizarPerfilFamiliar(@PathVariable Integer id_perfil, @PathVariable Integer id_usuario, @RequestBody PerfilesFamiliare perfilFamiliar) {
+    public ResponseEntity<?> actualizarPerfilFamiliar(@PathVariable Integer id_perfil, @PathVariable Integer id_usuario, @RequestBody RequestUpdatePerfilFamiliarDto perfilFamiliar) {
         Map<String, Object> response = new HashMap<>();
         try {
             PerfilesFamiliare perfil = perfilFamiliarservice.actualizarPerfilFamiliar(id_perfil, id_usuario, perfilFamiliar);
-            response.put("perfil", perfil);
+            ResponsePerfiFamiliarDto responsePerfiFamiliarDto = setDatosPerfilesFamiliaresDto(perfil);
+            response.put("perfil", responsePerfiFamiliarDto);
             response.put("mensaje", "Perfil familiar actualizado exitosamente");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            response.put("mensaje", "Error al actualizar el perfil familiar");
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
     // Endpoint para actualizar la ubicación de un perfil familiar
     @PutMapping("/{id_perfil}/ubicacion")
-    public ResponseEntity<PerfilesFamiliare> actualizarUbicacion(@PathVariable Integer id_perfil, @RequestParam BigDecimal latitud, @RequestParam BigDecimal longitud) {
+    public ResponseEntity<?> actualizarUbicacion(@PathVariable Integer id_perfil, @RequestParam BigDecimal latitud, @RequestParam BigDecimal longitud) {
+        Map<String, Object> response = new HashMap<>();
         try {
             PerfilesFamiliare perfil = perfilFamiliarservice.actualizarUbicacion(id_perfil, latitud, longitud);
+            ResponsePerfiFamiliarDto responsePerfiFamiliarDto = setDatosPerfilesFamiliaresDto(perfil);
+            response.put("perfil", responsePerfiFamiliarDto);
+            response.put("mensaje", "Ubicación actualizada exitosamente");
             return ResponseEntity.ok(perfil);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            response.put("mensaje", "Error al actualizar la ubicación");
+            response.put("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 

@@ -6,6 +6,7 @@ import com.codekion.vecino_seguro.service.Iservice.IUsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +33,10 @@ public class UsuarioImpl implements IUsuarioService {
     @Override
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
     }
 }

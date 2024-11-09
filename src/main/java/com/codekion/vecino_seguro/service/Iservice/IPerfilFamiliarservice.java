@@ -2,6 +2,7 @@ package com.codekion.vecino_seguro.service.Iservice;
 
 import com.codekion.vecino_seguro.model.PerfilesFamiliare;
 import com.codekion.vecino_seguro.model.dto.RequestPerfilFamiliarDto;
+import com.codekion.vecino_seguro.model.dto.RequestUpdatePerfilFamiliarDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IPerfilFamiliarservice {
 
     void eliminarPerfilFamiliar(Integer id_perfil,Integer usuarioId);
 
-    PerfilesFamiliare actualizarPerfilFamiliar(Integer id_perfil,Integer id_usuario, PerfilesFamiliare perfilFamiliar);
+    PerfilesFamiliare actualizarPerfilFamiliar(Integer id_perfil,Integer id_usuario, RequestUpdatePerfilFamiliarDto perfilFamiliar);
 
     PerfilesFamiliare actualizarUbicacion(Integer id_perfil, BigDecimal latitud, BigDecimal longitud);
 

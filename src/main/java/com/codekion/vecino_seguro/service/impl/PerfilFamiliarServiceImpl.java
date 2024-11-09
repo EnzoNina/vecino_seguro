@@ -4,6 +4,7 @@ import com.codekion.vecino_seguro.model.PerfilesFamiliare;
 import com.codekion.vecino_seguro.model.TiposRelacion;
 import com.codekion.vecino_seguro.model.Usuario;
 import com.codekion.vecino_seguro.model.dto.RequestPerfilFamiliarDto;
+import com.codekion.vecino_seguro.model.dto.RequestUpdatePerfilFamiliarDto;
 import com.codekion.vecino_seguro.repository.PerfilFamiliarRepository;
 import com.codekion.vecino_seguro.service.Iservice.IPerfilFamiliarservice;
 import com.codekion.vecino_seguro.service.Iservice.ITipoRelacionService;
@@ -121,8 +122,9 @@ public class PerfilFamiliarServiceImpl implements IPerfilFamiliarservice {
     }
 
     @Override
-    public PerfilesFamiliare actualizarPerfilFamiliar(Integer id_perfil, Integer id_usuario, PerfilesFamiliare perfilFamiliar) {
+    public PerfilesFamiliare actualizarPerfilFamiliar(Integer id_perfil, Integer id_usuario, RequestUpdatePerfilFamiliarDto perfilFamiliar) {
         Optional<Usuario> usuarioOpt = usuarioService.findById(id_usuario);
+        TiposRelacion tipoRelacion = tipoRelacionService.buscarTipoRelacion(Integer.valueOf(perfilFamiliar.getId_tipo_relacion()));
         if (usuarioOpt.isPresent()) {
             Usuario usuario = usuarioOpt.get();
 
@@ -135,9 +137,7 @@ public class PerfilFamiliarServiceImpl implements IPerfilFamiliarservice {
             Optional<PerfilesFamiliare> perfilExistente = perfilFamiliarRepository.findById(id_perfil);
             if (perfilExistente.isPresent()) {
                 PerfilesFamiliare perfil = perfilExistente.get();
-                perfil.setFamiliar_id(perfilFamiliar.getFamiliar_id());
-                perfil.setLatitud(perfilFamiliar.getLatitud());
-                perfil.setLongitud(perfilFamiliar.getLongitud());
+                perfil.setRelacion(tipoRelacion);
                 perfil.setFechaUltimaUbicacion(Instant.now());
                 return perfilFamiliarRepository.save(perfil);
             } else {

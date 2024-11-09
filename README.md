@@ -14,7 +14,78 @@ Este proyecto forma parte de la aplicación Vecino Seguro, una herramienta que p
 
 ## API Endpoints
 
-#### Agregar un perfil familiar
+## Usuarios
+
+### Listar usuarios
+
+```http
+  GET /usuarios/listarUsuarios
+```
+
+#### Cuerpo de respuesta
+
+```json
+{
+  "mensaje": "Usuarios listados exitosamente",
+  "usuarios": [
+    {
+      "nombres_completos": "Enzo Nina Aragon"
+    },
+    {
+      "nombres_completos": "Juan Perez Nina Aragon"
+    },
+    {
+      "nombres_completos": "Maria Lopez Nina Aragon"
+    },
+    {
+      "nombres_completos": "Carlos Garcia Nina Aragon"
+    },
+    {
+      "nombres_completos": "Ana Torres Nina Aragon"
+    },
+    {
+      "nombres_completos": "Pedro Sanchez Nina Pareja"
+    },
+    {
+      "nombres_completos": "Carmen Ramirez Aragon Pizarro"
+    }
+  ]
+}
+```         
+
+## Tipo Relacion Familiar
+
+### Listar relaciones
+
+```http
+  GET /relaciones-familiares/listar
+```
+
+#### Cuerpo de respuesta
+
+```json
+{
+  "relaciones": [
+    {
+      "id": 1,
+      "descripcion": "Padre"
+    },
+    {
+      "id": 2,
+      "descripcion": "Hijo"
+    },
+    {
+      "id": 3,
+      "descripcion": "Pareja"
+    }
+  ],
+  "mensaje": "Relaciones familiares listadas exitosamente"
+}
+```
+
+## Perfiles Familiares
+
+### Agregar un perfil familiar
 
 ```http
   POST /api/perfiles-familiares/{id_usuario}
@@ -50,7 +121,7 @@ Este proyecto forma parte de la aplicación Vecino Seguro, una herramienta que p
 ```
 
 
-#### Listar perfiles familiares de un usuario
+### Listar perfiles familiares de un usuario
 
 ```http
   GET /api/perfiles-familiares/{id_usuario}
@@ -116,5 +187,88 @@ Este proyecto forma parte de la aplicación Vecino Seguro, una herramienta que p
         }
     ],
     "mensaje": "Perfiles familiares listados exitosamente"
+}
+```
+
+### Eliminar perfil familiar
+    
+```http
+    DELETE /perfiles-familiares/eliminar/{{id_perfil}}/{{usuarioId}}    
+```
+
+| Parameter | Type     | Description                                      |
+| :-------- | :------- |:-------------------------------------------------|
+| `id_perfil`      | `string` | **Required**. ID del perfil familiar.            |
+| `usuarioId`      | `string` | **Required**. ID del usuario que hace la acciónn |
+
+
+#### Cuerpo de respuesta
+    
+```json
+{
+  "mensaje": "Perfil familiar eliminado exitosamente"
+}
+```
+
+### Actualizar perfil familiar
+
+```http
+    PUT /perfiles-familiares/{{id_perfil}}/{{id_usuario}}
+```
+
+| Parameter | Type     | Description                                      |
+| :-------- | :------- |:-------------------------------------------------|
+| `id_perfil`      | `string` | **Required**. ID del perfil familiar.            |
+| `usuarioId`      | `string` | **Required**. ID del usuario que hace la acciónn |
+
+#### Cuerpo de envio
+
+```json
+{
+  "id_tipo_relacion": 1
+}
+```
+
+#### Cuerpo de respuesta
+
+```json
+{
+  "perfil": {
+    "id": 32,
+    "nombre_usuario": "Pedro Sanchez",
+    "apellido_usuario": "Nina",
+    "nombre_familiar": "Carmen Ramirez",
+    "apellido_familiar": "Aragon",
+    "relacion": "Pareja"
+  },
+  "mensaje": "Perfil familiar actualizado exitosamente"
+}
+```
+
+### Actualizar ubicación de un perfil familiar
+
+```http
+    PUT /perfiles-familiares/{{id_perfil}}/ubicacion?latitud={{$placeholder}}&longitud={{$placeholder}}
+```
+
+| Parameter | Type     | Description                                      |
+| :-------- | :------- |:-------------------------------------------------|
+| `id_perfil`      | `string` | **Required**. ID del perfil familiar.            |
+| `latitud`      | `string` | **Required**. Latitud de la ubicación.           |
+| `longitud`      | `string` | **Required**. Longitud de la ubicación.          |
+
+#### Cuerpo de respuesta
+
+```json
+{
+  "perfil": {
+    "id": 32,
+    "nombre_usuario": "Pedro Sanchez",
+    "apellido_usuario": "Nina",
+    "nombre_familiar": "Carmen Ramirez",
+    "apellido_familiar": "Aragon",
+    "relacion": "Pareja"
+  },
+  "mensaje": "Ubicación actualizada exitosamente"
 }
 ```
