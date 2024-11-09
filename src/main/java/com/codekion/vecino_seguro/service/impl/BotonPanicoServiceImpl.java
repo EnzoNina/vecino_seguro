@@ -21,7 +21,7 @@ public class BotonPanicoServiceImpl implements IBotonPanicoService {
     @Override
     public BotonPanico activarBotonPanico(RequestBotonPanicoDto botonPanico) {
 
-        Usuario usuario = usuarioService.findById(Integer.valueOf(botonPanico.getUsuarioId()))
+        Usuario usuario = usuarioService.findById(Integer.valueOf(botonPanico.getId_usuario()))
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
         BotonPanico botonPanicoEntity = new BotonPanico();
