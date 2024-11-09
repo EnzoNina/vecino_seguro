@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar out/artifacts/vecino_seguro_jar/vecino_seguro.jar
