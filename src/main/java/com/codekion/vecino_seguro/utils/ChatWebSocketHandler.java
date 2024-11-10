@@ -5,6 +5,8 @@ import com.codekion.vecino_seguro.model.MessageType;
 import com.codekion.vecino_seguro.model.Usuario;
 import com.codekion.vecino_seguro.service.Iservice.IChatService;
 import com.codekion.vecino_seguro.service.Iservice.IUsuarioService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -23,6 +25,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     private static final Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<>());
     private final IChatService chatService;
     private final IUsuarioService usuarioService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -31,15 +34,16 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        broadcast(message.getPayload());
+        // Parse the message payload to extract user information and message content
         String payload = message.getPayload();
+        JsonNode jsonNode = objectMapper.readTree(payload);
+        String user = jsonNode.get("user").asText();
+        String content = jsonNode.get("message").asText();
 
-        String[] parts = payload.split(":", 2);
-        Integer userId = Integer.parseInt(parts[0]);
-        String content = parts[1];
+        // Find the user by name (assuming user names are unique)
+        Usuario usuario = usuarioService.findByUsername(user).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
-        Usuario usuario = usuarioService.findById(userId).orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
-
+        // Create a new Mensaje entity
         Mensaje mensaje = Mensaje.builder()
                 .usuario(usuario)
                 .contenido(content)
@@ -47,8 +51,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
                 .tipo(MessageType.CHAT)
                 .build();
 
+        // Save the message to the database
         chatService.saveMessage(mensaje);
 
+        // Broadcast the message to all connected clients
         broadcast(message.getPayload());
     }
 
