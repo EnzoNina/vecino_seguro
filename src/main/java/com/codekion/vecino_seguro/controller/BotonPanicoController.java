@@ -35,7 +35,7 @@ public class BotonPanicoController {
         botonPanicoResponseDto.setLongitud(String.valueOf(panico.getLongitud()));
         response.put("mensaje", "Boton de panico activado");
         response.put("botonPanico", botonPanicoResponseDto);
-        PanicButtonHandler.broadcast("ALERTA DE BOTON DE PANICO");
+        PanicButtonHandler.broadcast("ALERTA DE BOTON DE PANICO ACTIVO POR: " + botonPanicoResponseDto.getNombres() + " EN LA FECHA: " + botonPanicoResponseDto.getFechaActivacion());
         return ResponseEntity.ok(response);
     }
 
