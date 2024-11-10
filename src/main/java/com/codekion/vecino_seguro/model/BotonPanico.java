@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -43,7 +44,7 @@ public class BotonPanico {
 
     @PrePersist
     public void prePersist() {
-        fechaActivacion = ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant();
+        fechaActivacion = ZonedDateTime.now(ZoneId.of("America/Lima")).minus(5, ChronoUnit.HOURS).toInstant();
     }
 
 }

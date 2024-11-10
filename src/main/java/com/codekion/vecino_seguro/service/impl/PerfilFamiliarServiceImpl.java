@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -139,7 +140,7 @@ public class PerfilFamiliarServiceImpl implements IPerfilFamiliarservice {
             if (perfilExistente.isPresent()) {
                 PerfilesFamiliare perfil = perfilExistente.get();
                 perfil.setRelacion(tipoRelacion);
-                perfil.setFechaUltimaUbicacion(ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant());
+                perfil.setFechaUltimaUbicacion(ZonedDateTime.now(ZoneId.of("America/Lima")).minus(5, ChronoUnit.HOURS).toInstant());
                 return perfilFamiliarRepository.save(perfil);
             } else {
                 throw new IllegalArgumentException("Perfil familiar no encontrado");
@@ -156,7 +157,7 @@ public class PerfilFamiliarServiceImpl implements IPerfilFamiliarservice {
             PerfilesFamiliare perfil = perfilExistente.get();
             perfil.setLatitud(latitud);
             perfil.setLongitud(longitud);
-            perfil.setFechaUltimaUbicacion(ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant());
+            perfil.setFechaUltimaUbicacion(ZonedDateTime.now(ZoneId.of("America/Lima")).minus(5, ChronoUnit.HOURS).toInstant());
 
             return perfilFamiliarRepository.save(perfil);
         } else {

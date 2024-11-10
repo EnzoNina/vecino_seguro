@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -51,7 +52,7 @@ public class Incidente {
 
     @PrePersist
     public void prePersist() {
-        fechaReporte = ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant();
+        fechaReporte = ZonedDateTime.now(ZoneId.of("America/Lima")).minus(5, ChronoUnit.HOURS).toInstant();
     }
 
 }

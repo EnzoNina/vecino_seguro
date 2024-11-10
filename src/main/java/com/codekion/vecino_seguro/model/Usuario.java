@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -75,6 +76,6 @@ public class Usuario implements UserDetails {
 
     @PrePersist
     public void prePersist() {
-        this.fechaCreacion = ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant();
+        this.fechaCreacion = ZonedDateTime.now(ZoneId.of("America/Lima")).minus(5, ChronoUnit.HOURS).toInstant();
     }
 }
