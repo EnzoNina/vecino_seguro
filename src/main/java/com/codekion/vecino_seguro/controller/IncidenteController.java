@@ -1,10 +1,10 @@
 package com.codekion.vecino_seguro.controller;
 
-
 import com.codekion.vecino_seguro.model.Incidente;
 import com.codekion.vecino_seguro.model.dto.IncidenteResponseDto;
 import com.codekion.vecino_seguro.model.dto.RequestServiceDto;
 import com.codekion.vecino_seguro.service.Iservice.IIncidenteService;
+import com.codekion.vecino_seguro.utils.PanicButtonHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +22,14 @@ public class IncidenteController {
     private final IIncidenteService incidenteService;
 
     @PostMapping("/reportarIncidente")
-    public ResponseEntity<?> reportarIncidente(@RequestBody RequestServiceDto incidente) {
+    public ResponseEntity<?> reportarIncidente(@RequestBody RequestServiceDto incidente) {        
         Map<String, Object> response = new HashMap<>();
         Incidente reporte = incidenteService.reportarIncidente(incidente);
         IncidenteResponseDto incidenteResponseDto = new IncidenteResponseDto();
         setIncidenteResponseDto(reporte, incidenteResponseDto);
         response.put("mensaje", "Incidente reportado exitosamente");
         response.put("incidente", incidenteResponseDto);
+        PanicButtonHandler.broadcast("INCIDENTE REPORTADO: " + incidenteResponseDto.getTipo_incidente() + " EN LA FECHA: " + incidenteResponseDto.getFecha_reporte());
         return ResponseEntity.ok(response);
     }
 
