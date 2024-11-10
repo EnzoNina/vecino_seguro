@@ -20,8 +20,7 @@ import java.time.Instant;
 @Table(name = "mensajes")
 public class Mensaje {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mensajes_id_gen")
-    @SequenceGenerator(name = "mensajes_id_gen", sequenceName = "mensajes_mensaje_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mensaje_id", nullable = false)
     private Integer id;
 
