@@ -42,9 +42,8 @@ public class Mensaje {
     @Column(name = "url_imagen", length = Integer.MAX_VALUE)
     private String urlImagen;
 
-    @Size(max = 20)
     @NotNull
-    @Column(name = "tipo", nullable = false, length = 20)
+    @Column(name = "tipo", nullable = false)
     @Enumerated(EnumType.STRING)
     private MessageType tipo;
 
