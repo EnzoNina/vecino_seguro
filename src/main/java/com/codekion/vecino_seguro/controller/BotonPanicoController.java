@@ -4,6 +4,7 @@ import com.codekion.vecino_seguro.model.BotonPanico;
 import com.codekion.vecino_seguro.model.dto.BotonPanicoResponseDto;
 import com.codekion.vecino_seguro.model.dto.RequestBotonPanicoDto;
 import com.codekion.vecino_seguro.service.Iservice.IBotonPanicoService;
+import com.codekion.vecino_seguro.utils.PanicButtonHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ public class BotonPanicoController {
 
     private final IBotonPanicoService botonPanicoService;
 
+
     @PostMapping("/activar")
     public ResponseEntity<?> activarBotonPanico(@RequestBody RequestBotonPanicoDto dto) {
         Map<String, Object> response = new HashMap<>();
@@ -33,6 +35,7 @@ public class BotonPanicoController {
         botonPanicoResponseDto.setLongitud(String.valueOf(panico.getLongitud()));
         response.put("mensaje", "Boton de panico activado");
         response.put("botonPanico", botonPanicoResponseDto);
+        PanicButtonHandler.broadcast("ALERTA DE BOTON DE PANICO");
         return ResponseEntity.ok(response);
     }
 
