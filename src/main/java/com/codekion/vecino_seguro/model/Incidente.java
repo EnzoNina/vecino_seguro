@@ -10,6 +10,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -49,7 +51,7 @@ public class Incidente {
 
     @PrePersist
     public void prePersist() {
-        fechaReporte = Instant.now();
+        fechaReporte = ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant();
     }
 
 }

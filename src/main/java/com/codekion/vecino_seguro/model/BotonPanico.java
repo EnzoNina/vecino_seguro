@@ -10,6 +10,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Getter
 @Setter
@@ -41,7 +43,7 @@ public class BotonPanico {
 
     @PrePersist
     public void prePersist() {
-        fechaActivacion = Instant.now();
+        fechaActivacion = ZonedDateTime.now(ZoneId.of("America/Lima")).toInstant();
     }
 
 }
