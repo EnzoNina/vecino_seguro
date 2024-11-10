@@ -30,14 +30,14 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        // Parse the message payload to extract user information and message content
+
         String payload = message.getPayload();
         JsonNode jsonNode = objectMapper.readTree(payload);
         String user = jsonNode.get("user").asText();
         System.out.println("USUARIO : " + user);
         String content = jsonNode.get("message").asText();
-        guardarMensaje.almacenarMensaje(user, content);
-
+        // Falta enviar a la base de datos
+        
         // Broadcast the message to all connected clients
         broadcast(message.getPayload());
     }
