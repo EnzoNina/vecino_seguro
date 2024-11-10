@@ -30,6 +30,7 @@ public class PanicButtonHandler extends TextWebSocketHandler {
     }
 
     public static void broadcast(String message) {
+        System.out.println("Broadcasting message TEST: " + message);
         synchronized (sessions) {
             for (WebSocketSession session : sessions) {
                 try {
