@@ -29,6 +29,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     }
 
     public static void broadcast(String message) {
+        System.out.println("Broadcasting TEST: " + message);
         synchronized (sessions) {
             for (WebSocketSession session : sessions) {
                 try {
